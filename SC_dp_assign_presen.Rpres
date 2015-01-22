@@ -1,0 +1,62 @@
+Metabolic Syndrome Risk Estimator
+========================================================
+
+author: sc
+
+date: Jan 20, 2015
+
+
+Metabolic Syndrome Markers
+========================================================
+> "Metabolic syndrome is a disorder of energy utilization and storage, 
+> diagnosed by a co-occurrence of three out of five of the following
+> medical conditions: abdominal (central) obesity, elevated blood 
+> pressure, elevated fasting plasma glucose, high serum triglycerides,
+> and low high-density cholesterol (HDL) levels. Metabolic syndrome
+> increases the risk of developing cardiovascular disease, particularly
+> heart failure, and diabetes." - Wikipedia
+
+For simplicity, only three medical condition markers are used
+- Body mass index
+- Systolic blood pressure
+- Level of bad cholesterol
+
+
+
+Estimating the risk
+========================================================
+```{r, echo=FALSE}
+low_rsk <<- 10   # Low risk quantification
+med_rsk <<- 50   # Medium risk quantification
+hig_rsk <<- 90   # High risk quantification
+```
+First, we quantify the three risk factors
+- Obesity risk (based on body mass index calculated from height and weight)
+- Hypertension risk (based on systolic blood pressure)
+- Artery clogging risk (based on LDL cholesterol level)
+
+Each of the above risk factors are categorized into three levels (low, medium, and high), with assigned values of `r low_rsk`%, `r med_rsk`%, and `r hig_rsk`% respectively
+
+Finally, the overall Metabolic Syndrome risk is estimated by taking the average of the above three risk factors 
+
+
+Screenshot and Application URL
+========================================================
+
+![alt text](myApp.png)
+You can find the application at the following link:
+http://sc2015.shinyapps.io/SC_dp_assign
+
+A note on usage
+========================================================
+```{r, echo=FALSE}
+h_obs <<- 27.0   # Obesity risk is considered high above this BMI 
+h_hts <<- 158    # hypertension risk is considered high above this BP(sys)
+h_acl <<- 129    # Artery clogging risk is considered high above this LDL
+```
+Please note that in the calculations
+- the obesity risk is considered high if the body mass index (weight/height(m)^2 ) is equal to or above `r h_obs`
+- the hypertension risk is adjudged high when systolic blood pressure is greater than `r h_hts` (mm/Hg)
+- the blood circulation (artery clogging) risk is considered high when the LDL cholesterol value is above `r h_acl` (mg/dL)
+
+Therefore, for some users the result may appear to be a bit on the conservative side. But don't be disheartened, this is just a ballpark estimator. It will definitely help you determine which marker you should focus on first to reduce your overall metabolic syndrome risk.
